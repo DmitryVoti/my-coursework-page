@@ -1,0 +1,145 @@
+:root {
+    --gap: 24px;
+    --content-gap: 20px;
+    --nav-width: 1024px;
+    --main-width: 720px;
+    --header-height: 60px;
+    --footer-height: 60px;
+    --radius: 8px;
+    --background-for-images:  rgb(255, 255, 255);
+    --theme: rgb(255, 255, 255);
+    --entry: rgb(255, 255, 255);
+    --primary: rgb(30, 30, 30);
+    --secondary: rgb(108, 108, 108);
+    --tertiary: rgb(214, 214, 214);
+    --content: rgb(31, 31, 31);
+    --hljs-bg: rgb(28, 29, 33);
+    --code-bg: rgb(245, 245, 245);
+    --border: rgb(238, 238, 238);
+    --nav-secondary: rgba(108, 108, 108, 0.5);
+}
+.dark {
+    --theme: rgb(29, 30, 32);
+    --entry: rgb(46, 46, 51);
+    --primary: rgb(218, 218, 219);
+    --secondary: rgb(155, 156, 157);
+    --tertiary: rgb(65, 66, 68);
+    --content: rgb(196, 196, 197);
+    --hljs-bg: rgb(46, 46, 51);
+    --code-bg: rgb(55, 56, 62);
+    --border: rgb(51, 51, 51);
+    --nav-secondary: rgba(155, 156, 157, 0.5);
+}
+
+body #theme-toggle {
+  color: var(--primary); 
+  border: var(--theme);
+}
+
+#theme-toggle svg {
+    height: 18px;
+}
+
+button#theme-toggle {
+    font-size: 26px;
+    margin: auto 4px;
+    background: var(--theme)
+}
+
+.list {
+    background: var(--theme)
+}
+
+.dark.list {
+    background: var(--theme)
+}
+
+body.dark #moon {
+    vertical-align: middle;
+    display: none;
+}
+
+body:not(.dark) #sun {
+    display: none;
+}
+
+body {
+    font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--primary);
+    background-color: var(--theme);
+    margin: 0;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+}
+
+.main {
+    position: relative;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: auto;
+    padding: var(--gap)
+}
+
+.post-single {
+    max-width: 1200;
+}
+
+.post-title {
+    text-align: left;
+}
+
+.image-box { 
+    display: flex;
+    width: 500px;
+    height: 300px;
+    margin-top: 20px;
+    align-items: center;  
+    justify-content: center;
+    background-color: var(--background-for-images);
+}
+
+.image-box img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+nav {
+    background-color:var(--nav-secondary);        
+    display: inline-block;
+    border-radius: 8px;
+}
+
+.text-list {
+    background-color:var(--nav-secondary);
+    margin-left: 20pt;
+}
+
+h3 {
+    margin-left: 20px;
+}
+
+.nav-link{
+    color: var(--primary)
+}
+
+.nav-text{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.scroll-down{
+    color: var(--primary);
+    background-color: var(--theme); 
+    border: var(--theme);    
+}
+
+

@@ -1,0 +1,52 @@
+<svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="clTitle clDesc">
+  <title id="clTitle">Классификация модификаций дерева Меркла</title>
+  <desc id="clDesc">Три класса модификаций: структурные, алгебраические и специализированные, с двумя представителями в каждом.</desc>
+  <rect x="0" y="0" width="760" height="420" fill="#faf9f5"/>
+
+  <g>
+    <rect x="290" y="16" width="180" height="46" rx="4" fill="#1b2430"/>
+    <text x="380" y="44" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#faf9f5">Дерево Меркла</text>
+  </g>
+
+  <g stroke="#a9a397" stroke-width="1.4" fill="none">
+    <line x1="380" y1="62" x2="130" y2="110"/>
+    <line x1="380" y1="62" x2="380" y2="110"/>
+    <line x1="380" y1="62" x2="630" y2="110"/>
+  </g>
+
+  <!-- Class I -->
+  <g>
+    <rect x="30" y="110" width="200" height="40" rx="4" fill="#3a7d67"/>
+    <text x="130" y="135" text-anchor="middle" font-family="Georgia, serif" font-size="12.5" fill="#faf9f5">Класс I. Структурные</text>
+    <rect x="30" y="168" width="200" height="38" rx="4" fill="#fff" stroke="#c9a15a" stroke-width="1.5"/>
+    <text x="130" y="192" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#1b2430">Merkle Patricia Trie</text>
+    <rect x="30" y="216" width="200" height="38" rx="4" fill="#fff" stroke="#c9a15a" stroke-width="1.5"/>
+    <text x="130" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#1b2430">Merkle AVL Tree</text>
+  </g>
+
+  <!-- Class II -->
+  <g>
+    <rect x="280" y="110" width="200" height="40" rx="4" fill="#3a7d67"/>
+    <text x="380" y="135" text-anchor="middle" font-family="Georgia, serif" font-size="12.5" fill="#faf9f5">Класс II. Алгебраические</text>
+    <rect x="280" y="168" width="200" height="38" rx="4" fill="#fff" stroke="#c9a15a" stroke-width="1.5"/>
+    <text x="380" y="192" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#1b2430">Homomorphic Merkle</text>
+    <rect x="280" y="216" width="200" height="38" rx="4" fill="#fff" stroke="#c9a15a" stroke-width="1.5"/>
+    <text x="380" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#1b2430">RSA Merkle Tree</text>
+  </g>
+
+  <!-- Class III -->
+  <g>
+    <rect x="530" y="110" width="200" height="40" rx="4" fill="#3a7d67"/>
+    <text x="630" y="135" text-anchor="middle" font-family="Georgia, serif" font-size="12.5" fill="#faf9f5">Класс III. Специализированные</text>
+    <rect x="530" y="168" width="200" height="38" rx="4" fill="#fff" stroke="#c9a15a" stroke-width="1.5"/>
+    <text x="630" y="192" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#1b2430">Sparse Merkle Tree</text>
+    <rect x="530" y="216" width="200" height="38" rx="4" fill="#fff" stroke="#c9a15a" stroke-width="1.5"/>
+    <text x="630" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11.5" fill="#1b2430">Compact Multiproofs</text>
+  </g>
+
+  <g font-family="Georgia, serif" font-size="11.5" fill="#6b6459">
+    <text x="130" y="284" text-anchor="middle">топология дерева</text>
+    <text x="380" y="284" text-anchor="middle">алгебраический примитив</text>
+    <text x="630" y="284" text-anchor="middle">сценарий применения</text>
+  </g>
+</svg>

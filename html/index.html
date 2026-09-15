@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Деревья Меркла</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body class="list" id="top">
+        <header class="header">
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+            <button class="scroll-down" aria-label="Прокрутить вниз"><a class="scroll-down" href="#conclusions">↓</a></button>
+        </header>
+        
+        <main class="main">
+            <header class="post-header">
+                <h1 class="post-title">ИССЛЕДОВАНИЕ ДЕРЕВА МЕРКЛА И ЕГО МОДИФИКАЦИЙ</h1>
+                <div class="post-meta">
+                    Выполнил студент группы ФИб-2301-52-00 Д.С. Вотинцев<br>
+                    Руководитель к.ф.-м.н., доцент кафедры ПМИ Н.В. Шалагинова
+                </div>
+                <nav>
+                    <details open class="nav-text">
+                        <summary>Содержание</summary>
+                        <ul>
+                            <li><a class="nav-link" href="#theory">Введение</a></li>
+                            <li><a class="nav-link" href="#theory">Теория</a></li>
+                            <ul>
+                                <li><a class="nav-link" href="#theory-1">Криптографическая хэш-функция</a></li>
+                                <li><a class="nav-link" href="#theory-2">Дерево Меркла</a></li>
+                                <li><a class="nav-link" href="#theory-3">Корень Меркла и доказательство включения</a></li>
+                            </ul>
+                            <li><a class="nav-link" href="#classification">Классификация</a></li>
+                            <li><a class="nav-link" href="#algorithms">Алгоритм</a></li>
+                            <li><a class="nav-link" href="#results">Результаты</a></li>
+                            <li><a class="nav-link" href="#conclusions">Выводы</a></li>
+                        </ul>
+                    </details>      
+                </nav>
+            </header>
+
+            <article class="post-single" id="theory">
+                <h2>Теория</h2>
+                <h3 id="theory-1">Криптографическая хэш-функция</h3>
+                <p>
+                    Криптографическая хэш-функция — детерминированная функция, отображающая произвольную последовательность битов в выходное значение фиксированной длины (дайджест). Для использования в структурах аутентификации данных функция H должна обладать следующими свойствами:
+                    <nav>
+                        <li style="margin-left: 40px;">устойчивость ко второму прообразу — по данному x невозможно найти x′ ≠ x такое, что H(x) = H(x′);</li>
+                        <li style="margin-left: 40px;">устойчивость к коллизиям — вычислительно невозможно найти любые x ≠ x′ такие, что H(x) = H(x′);</li>
+                        <li style="margin-left: 40px;">устойчивость к прообразу — вычислительно невозможно по данному y найти x такое, что H(x) = y;</li>
+                        <li style="margin-left: 40px;">лавинный эффект — изменение одного входного бита приводит к изменению в среднем половины выходных битов.</li>
+                    </nav>
+                </p>
+
+                <h3 id="theory-2">Дерево Меркла</h3>
+                <article class="image-box">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Hash_Tree.svg?utm_source=ru.wikipedia.org&utm_campaign=index&utm_content=original" alt="Дерево Меркла">
+                </article>
+                <p>
+                    Пусть D = {d₀, …, dₙ₋₁} — набор из n блоков данных. Классическое дерево Меркла — полное двоичное дерево T = (V, E), построенное на D, в котором листовой узел Lᵢ содержит значение H(dᵢ), а каждый внутренний узел с потомками l и r — значение H(l ∥ r). Единственный узел без родителя — корень Меркла Root(T). Если n не является степенью двойки, дерево дополняется нулевым хэшем H(∅).
+                </p>
+
+                <h3 id="theory-3">Корень Меркла и доказательство включения</h3>
+                <article class="image-box">
+                    <img src="images/mercle_proof.png" alt="Дерево Меркла">
+                </article>
+                <p>
+                    Пусть D = {d₀, …, dₙ₋₁} — набор из n блоков данных. Классическое дерево Меркла — полное двоичное дерево T = (V, E), построенное на D, в котором листовой узел Lᵢ содержит значение H(dᵢ), а каждый внутренний узел с потомками l и r — значение H(l ∥ r). Единственный узел без родителя — корень Меркла Root(T). Если n не является степенью двойки, дерево дополняется нулевым хэшем H(∅).
+                </p>
+            </article>
+            <article class="post-single" id="classification">
+                <h2>Классификация</h2>
+                <article class="image-box">
+                    <img src="images/classification.svg" alt="Картинка, на которой изображена визуализация классификации деревьев Меркла">
+                </article>
+                <p>
+                    Анализ литературы позволяет выделить три принципиально различных направления в развитии дерева Меркла: изменение топологии, замену хэш-функции на алгебраическую структуру и специализацию под конкретный сценарий.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Класс</th>
+                            <th>Структура</th>
+                            <th>Ключевая идея</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>I. Структурные</td>
+                            <td>Merkle Patricia Trie</td>
+                            <td>Стандарт Ethereum; сжатое radix-дерево для пар «ключ — значение»</td>
+                        </tr>
+                        <tr>
+                            <td>I. Структурные</td>
+                            <td>Merkle AVL Tree</td>
+                            <td>Гарантированная O(log n) высота при динамических обновлениях</td>
+                        </tr>
+                        <tr>
+                            <td>II. Алгебраические</td>
+                            <td>Homomorphic Merkle Tree</td>
+                            <td>Мультипликативно-гомоморфная хэш-функция, O(1)-обновление корня</td>
+                        </tr>
+                        <tr>
+                            <td>II. Алгебраические</td>
+                            <td>RSA Merkle Tree</td>
+                            <td>Узловая функция на основе модульного возведения в степень (RSA)</td>
+                        </tr>
+                        <tr>
+                            <td>III. Специализированные</td>
+                            <td>Sparse Merkle Tree</td>
+                            <td>Единственная структура с доказательствами не-включения</td>
+                        </tr>
+                        <tr>
+                            <td>III. Специализированные</td>
+                            <td>Compact Merkle Multiproofs</td>
+                            <td>Компактная одновременная верификация нескольких листьев</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <article class="post-single" id="algorithms">
+                <h2>Реализация выбранных алгоритмов</h2>
+                <p>Все семь структур реализованы на Python 3.12 в едином модуле <code>merkle_benchmark.py</code>, с использованием <code>hashlib</code> (SHA-256), пакета <code>cryptography</code> для параметров RSA, <code>tracemalloc</code> для профилирования памяти и <code>time.perf_counter()</code> для измерения времени.</p>
+
+                <h3>Classic Merkle Tree</h3>
+                <p>Двоичное хэш-дерево на SHA-256: каждый лист хранит хэш блока данных, каждый внутренний узел — хэш конкатенации потомков. Построение — O(n), обновление листа — O(log n), размер доказательства — O(log n) хэшей.</p>
+
+                <h3>Merkle Patricia Trie</h3>
+                <p>Объединяет сжатое radix-дерево (Patricia Trie) с хэш-аннотацией узлов. Три типа узлов: Leaf, Extension, Branch (16 слотов). Вставка и поиск по ключу длиной k выполняются за O(k); используется в Ethereum для state, storage и receipts trie.</p>
+
+                <h3>Merkle AVL Tree</h3>
+                <p>Самобалансирующееся BST-дерево, дополненное хэшами Меркла и высотой узла. Балансировочные вращения гарантируют высоту не более 1.44·log₂ n, что даёт стабильно малый размер доказательства.</p>
+
+                <h3>Homomorphic Merkle Tree</h3>
+                <p>Хэш листа вычисляется как gᴴ⁽ᵈ⁾ mod p в мультипликативной группе (ℤ/pℤ)* (1024-битный модуль, RFC 5114). Благодаря коммутативности умножения корень при изменении одного листа пересчитывается за O(1) групповых операций — без обхода дерева.</p>
+
+                <h3>RSA Merkle Tree</h3>
+                <p>Узловая функция заменена на модульное возведение в степень: H(x) = SHA256_int(x)ᵉ mod N. Корень может быть подписан приватным ключом RSA, что связывает Merkle-структуру с инфраструктурой открытых ключей (PKI).</p>
+
+                <h3>Sparse Merkle Tree</h3>
+                <p>Дерево фиксированной глубины 256, охватывающее всё адресное пространство ключей; пустые листья получают предвычисленный нулевой хэш. Единственная из рассмотренных структур, поддерживающая доказательства не-включения (non-membership proof) — применяется в протоколах Semaphore и Aztec Protocol.</p>
+
+                <h3>Compact Merkle Multiproofs</h3>
+                <p>Компактное доказательство для набора индексов листьев: исключаются «братские» хэши, восстановимые из других элементов пруфа. Используется в спецификации Ethereum Beacon Chain SSZ для верификации пакетов подписей.</p>
+            </article>
+            
+            <article class="post-single" id="results">
+                <h2>Бенчмарк и анализ результатов</h2>
+                <p>Каждый тест запускался 200 раз с независимыми случайными наборами данных объёмом n = 10, 50 и 200 элементов (32-байтные блоки, os.urandom(32)); результаты усреднены.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Алгоритм</th>
+                            <th>n = 10</th>
+                            <th>n = 50</th>
+                            <th>n = 200</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Classic Merkle Tree</td>
+                            <td>0.288 ±0.686</td>
+                            <td>1.391 ±3.404</td>
+                            <td>2.815 ±1.704</td>
+                        </tr>
+                        <tr>
+                            <td>Merkle Patricia Trie</td>
+                            <td>0.288 ±0.187</td>
+                            <td>1.935 ±1.199</td>
+                            <td>11.217 ±13.675</td>
+                        </tr>
+                        <tr>
+                            <td>Merkle AVL Tree</td>
+                            <td>0.839 ±0.853</td>
+                            <td>6.033 ±1.794</td>
+                            <td>32.262 ±7.817</td>
+                        </tr>
+                        <tr>
+                            <td>Homomorphic Merkle</td>
+                            <td>34.589 ±16.817</td>
+                            <td>164.937 ±27.821</td>
+                            <td>676.840 ±68.383</td>
+                        </tr>
+                        <tr>
+                            <td>RSA Merkle Tree</td>
+                            <td>20.048 ±5.217</td>
+                            <td>38.282 ±10.543</td>
+                            <td>110.779 ±23.252</td>
+                        </tr>
+                        <tr>
+                            <td>Sparse Merkle Tree</td>
+                            <td>23.876 ±8.837</td>
+                            <td>115.386 ±27.866</td>
+                            <td>463.612 ±61.851</td>
+                        </tr>
+                        <tr>
+                            <td>Compact Multiproofs</td>
+                            <td>0.269 ±0.290</td>
+                            <td>0.887 ±0.444</td>
+                            <td>3.425 ±1.339</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>По времени построения лидирует Classic Merkle Tree (0.288–2.815 мс), вплотную примыкают Compact Merkle Multiproofs. Homomorphic Merkle достигает 676.840 мс при n=200 — примерно в 240 раз медленнее классического дерева из-за тяжёлых модульных вычислений. По размеру доказательства наиболее компактны MPT (64–96 Б) и Classic Merkle Tree (128–256 Б); Sparse Merkle Tree даёт фиксированный размер 8192 Б — плата за возможность доказательства не-включения. Compact Multiproofs при n=200 (k=50 листьев) дают экономию ×5.8 относительно суммы одиночных доказательств.</p>
+            </article>
+
+            <article class="post-single" id="conclusions">
+                <h2>Выводы и рекомендации по применению</h2>
+                <h3>Приоритет скорости и минимальной памяти</h3>
+                <p>Classic Merkle Tree (SHA-256) — лучшее время построения, детерминированная память, логарифмически малый размер доказательства. Подходит для блокчейн-приложений и контроля целостности файлов.</p>
+
+                <h3>Частые обновления, работа с парами ключ — значение</h3>
+                <p>Merkle Patricia Trie — компактные доказательства (64–96 Б), эффективная работа с ключами произвольной длины; используется в Ethereum для хранения состояния.</p>
+
+                <h3>Динамические наборы с упорядоченными ключами</h3>
+                <p>Merkle AVL Tree — гарантированная O(log n) высота благодаря балансировке, самая быстрая генерация доказательств (0.009–0.023 мс).</p>
+
+                <h3>Доказательства не-включения</h3>
+                <p>Sparse Merkle Tree — единственная структура со 100%-успешными non-membership proof; плата — фиксированный размер доказательства 8192 Б.</p>
+
+                <h3>Гомоморфные свойства и агрегация</h3>
+                <p>Homomorphic Merkle Tree — O(1)-обновление корня; практична при наличии аппаратного ускорения модульной арифметики.</p>
+
+                <h3>Пакетная верификация нескольких листьев</h3>
+                <p>Compact Merkle Multiproofs — экономия размера доказательства до ×5.8 при k=50 листьях; не поддерживает одиночное обновление.</p>
+
+                <h3>Заключение</h3>
+                <p>В ходе выполнения курсового проекта проведено сравнительное исследование классического дерева Меркла и шести его модификаций. Все семь алгоритмов реализованы на Python и протестированы при трёх объёмах входных данных в 200 независимых прогонах. Перспективами дальнейшего исследования являются тестирование на реальных блокчейн-наборах данных, оптимизации на основе параллельных вычислений и анализ применимости рассмотренных структур в схемах доказательств с нулевым разглашением (ZKP).</p>
+            </article>
+        </main>
+        
+        <script>
+            document.getElementById("theme-toggle").addEventListener("click", () => {
+                if (document.body.className.includes("dark")) {
+                    document.body.classList.remove('dark');
+                    localStorage.setItem("pref-theme", 'light');
+                } else {
+                    document.body.classList.add('dark');
+                    localStorage.setItem("pref-theme", 'dark');
+                }
+            })
+        </script>
+    </body>
+</html>
